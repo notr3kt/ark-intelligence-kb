@@ -1,0 +1,159 @@
+{
+  "module_name": "Boolean Search String Generator",
+  "purpose": "Generate copy-paste ready search strings for LinkedIn, Indeed, and job boards",
+  
+  "what_is_boolean": {
+    "simple_explanation": "Boolean search is like giving Google very specific instructions. Instead of typing 'cloud engineer jobs', you tell it exactly what to include (AND), what alternatives are okay (OR), and what to avoid (NOT).",
+    "why_useful": "Helps you find needles in haystacks. Instead of scrolling through 10,000 resumes, you get 50 highly relevant ones.",
+    "where_to_use": ["LinkedIn Recruiter", "Indeed", "Dice", "Monster", "Google (for GitHub/websites)"]
+  },
+  
+  "templates": {
+    "wide_net": {
+      "purpose": "Cast a broad net - find anyone who might be relevant",
+      "structure": "(title1 OR title2 OR title3) AND (skill1 OR skill2) AND location",
+      "use_when": "Starting your search or need many candidates quickly",
+      "example": "(\"Cloud Engineer\" OR \"DevOps Engineer\" OR \"Platform Engineer\" OR \"SRE\") AND (AWS OR Azure OR GCP) AND (Kubernetes OR Docker)"
+    },
+    
+    "focused": {
+      "purpose": "Find candidates who match most/all requirements",
+      "structure": "\"exact_title\" AND (skill1 AND skill2 AND skill3) AND location",
+      "use_when": "You know exactly what you want and need quality over quantity",
+      "example": "\"Senior DevOps Engineer\" AND AWS AND Terraform AND Kubernetes AND Jenkins AND \"United States\""
+    },
+    
+    "niche": {
+      "purpose": "Find rare/senior talent with specific expertise",
+      "structure": "(senior_title1 OR senior_title2) AND (advanced_skill1 OR rare_skill2) AND NOT (junior OR entry)",
+      "use_when": "Looking for experts, specialists, or hard-to-fill roles",
+      "example": "(\"Principal Engineer\" OR \"Staff Engineer\" OR \"Architect\") AND (Istio OR ServiceMesh OR Helm) AND AWS NOT (Junior OR Associate OR Entry)"
+    },
+    
+    "x_ray_linkedin": {
+      "purpose": "Search LinkedIn profiles via Google (when you don't have Recruiter)",
+      "structure": "site:linkedin.com/in AND keywords AND location",
+      "example": "site:linkedin.com/in \"DevOps Engineer\" AWS Terraform Seattle"
+    },
+    
+    "x_ray_github": {
+      "purpose": "Find developers by their GitHub contributions",
+      "structure": "site:github.com AND language AND keyword",
+      "example": "site:github.com Terraform AWS Seattle"
+    }
+  },
+  
+  "building_blocks": {
+    "operators": {
+      "AND": {
+        "what": "Both terms must be present",
+        "example": "AWS AND Kubernetes (finds people with both)",
+        "note": "Makes search narrower/more specific"
+      },
+      
+      "OR": {
+        "what": "Either term can be present",
+        "example": "AWS OR Azure (finds people with either cloud)",
+        "note": "Makes search wider/more inclusive"
+      },
+      
+      "NOT": {
+        "what": "Exclude this term",
+        "example": "Engineer NOT Intern (excludes interns)",
+        "note": "Filters out unwanted results"
+      },
+      
+      "quotes": {
+        "what": "Exact phrase match",
+        "example": "\"Senior DevOps Engineer\" (exact title)",
+        "note": "Use for titles, certifications, or specific phrases"
+      },
+      
+      "parentheses": {
+        "what": "Group terms together",
+        "example": "(AWS OR Azure OR GCP) AND Terraform",
+        "note": "Like in math - do the parentheses first"
+      }
+    },
+    
+    "title_synonyms": {
+      "DevOps_Engineer": ["Platform Engineer", "SRE", "Site Reliability Engineer", "Infrastructure Engineer", "Cloud Engineer"],
+      "Full_Stack_Developer": ["Software Engineer", "Application Developer", "Web Developer"],
+      "Data_Engineer": ["ETL Developer", "Data Pipeline Engineer", "Analytics Engineer"],
+      "Cloud_Architect": ["Solutions Architect", "Infrastructure Architect", "Cloud Solutions Architect"],
+      "Project_Manager": ["Program Manager", "Delivery Manager", "Scrum Master", "Agile Coach"],
+      "Business_Analyst": ["Systems Analyst", "Functional Analyst", "Requirements Analyst"]
+    },
+    
+    "skill_aliases": {
+      "Kubernetes": ["K8s", "EKS", "GKE", "AKS", "OpenShift"],
+      "JavaScript": ["JS", "ES6", "ECMAScript", "Node.js", "TypeScript"],
+      "CICD": ["Jenkins", "GitLab CI", "GitHub Actions", "CircleCI", "Travis CI"],
+      "Amazon_Web_Services": ["AWS", "EC2", "S3", "Lambda", "ECS", "EKS"]
+    },
+    
+    "location_modifiers": {
+      "remote": ["remote", "work from home", "WFH", "distributed", "anywhere"],
+      "hybrid": ["hybrid", "flexible", "2-3 days onsite"],
+      "onsite": ["onsite", "in-office", "on-premises"]
+    },
+    
+    "seniority_indicators": {
+      "senior": ["Senior", "Sr", "Lead", "Principal", "Staff", "Architect"],
+      "mid": ["Engineer", "Developer", "Analyst"],
+      "junior": ["Junior", "Jr", "Associate", "Entry", "Intern"]
+    }
+  },
+  
+  "generation_workflow": {
+    "step_1_identify_core": "Extract the 3-5 most important skills from JD",
+    "step_2_find_synonyms": "Look up alternative titles and skill names",
+    "step_3_build_strings": "Generate wide, focused, and niche versions",
+    "step_4_add_location": "Include geography and work mode if specified",
+    "step_5_explain_usage": "Tell user how to copy-paste and where to use each string"
+  },
+  
+  "output_format": {
+    "for_each_string": {
+      "label": "Wide Net / Focused / Niche / X-Ray",
+      "string": "The actual boolean query in code block for easy copying",
+      "where_to_use": "LinkedIn / Indeed / Google",
+      "expected_results": "~X results (rough estimate)",
+      "pro_tip": "One piece of advice for using this string effectively"
+    },
+    
+    "example_output": "```\nWIDE NET (LinkedIn Recruiter):\n(\"Cloud Engineer\" OR \"DevOps Engineer\" OR \"Platform Engineer\") AND (AWS OR Azure) AND (Docker OR Kubernetes) AND \"United States\"\n\nWhere to use: LinkedIn Recruiter or LinkedIn Sales Navigator\nExpected results: ~500-1000 candidates\nPro tip: Start here, then narrow down with the Focused string if you get too many results\n```"
+  },
+  
+  "tips_and_tricks": {
+    "linkedin_specific": [
+      "Use quotes around exact titles: \"Senior DevOps Engineer\"",
+      "LinkedIn is case-insensitive, so no need to capitalize",
+      "Put location in quotes if it's a multi-word city: \"New York\"",
+      "Use filters in LinkedIn Recruiter (years of experience, current company) along with Boolean"
+    ],
+    
+    "indeed_specific": [
+      "Indeed's search is less sophisticated - keep it simpler",
+      "Use fewer parentheses and ORs",
+      "Filter by date posted (last 7 days) to avoid old resumes"
+    ],
+    
+    "common_mistakes": [
+      "Using too many ORs - makes search too broad",
+      "Forgetting quotes around multi-word terms",
+      "Not excluding junior terms when looking for senior roles",
+      "Making it so narrow that you get 0 results"
+    ],
+    
+    "optimization": [
+      "If you get 0 results: Remove one AND requirement or add more OR options",
+      "If you get 10,000 results: Add more AND requirements or be more specific",
+      "If results are off-topic: Add NOT terms to exclude irrelevant profiles"
+    ]
+  },
+  
+  "explain_to_user": {
+    "default_message": "I've generated 3 search strings for you:\n\n1. **Wide Net** - Cast a broad search, good for starting\n2. **Focused** - Find candidates who match most requirements \n3. **Niche** - Target senior/expert-level talent\n\nEach string is ready to copy-paste into LinkedIn, Indeed, or Google. I'll show you where to use each one and what to expect."
+  }
+}
